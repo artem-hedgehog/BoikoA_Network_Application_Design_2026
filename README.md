@@ -1,1 +1,1 @@
-# BoikoA_Network_Application_Design_2026
+# Репозиторий для работы по курсу "Проектирование Сетевых Приложений" (Java Script)
