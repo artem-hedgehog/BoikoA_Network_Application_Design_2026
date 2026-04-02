@@ -21,5 +21,40 @@
 ## Изменения
 
 1. **Все цифры и операции над числами можно вводить не только с помощью кнопок, но и непосредственно с клавиатуры**
-![alt text](image-2.png)
-![alt text](image-3.png)
+```javascript
+if (key >= '0' && key <= '9') {
+    event.preventDefault();
+    handleDigit(key);
+}
+
+else if (key === '.') {
+    event.preventDefault();
+    handleDigit('.');
+}
+    
+else if (key === '+') {
+    event.preventDefault();
+    handleOperator('+');
+}
+else if (key === '-') {
+    event.preventDefault();
+    handleOperator('-');
+}
+else if (key === '*') {
+    event.preventDefault();
+    handleOperator('x');
+}
+else if (key === '/') {
+    event.preventDefault();
+    handleOperator('/');
+}
+
+else if (key === 'Enter' || key === '=') {
+    event.preventDefault();
+    calculate();
+}
+
+else if (key === 'Escape' || key === 'Delete' || key === 'c' || key === 'C') {
+    event.preventDefault();
+    clearAll();
+}
