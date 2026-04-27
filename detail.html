@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>3D Детальный просмотр</title>
+    <link rel="stylesheet" href="styles.css">
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/examples/jsm/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="detail-container">
+        <div class="controls-panel">
+            <button id="backBtn" class="ctrl-btn">← Назад</button>
+            <div class="zoom-group">
+                <button id="zoomIn" class="ctrl-btn">+</button>
+                <button id="zoomOut" class="ctrl-btn">-</button>
+            </div>
+            <div class="view-group">
+                <button id="viewFront" class="ctrl-btn">Спереди</button>
+                <button id="viewBack" class="ctrl-btn">Сзади</button>
+                <button id="viewLeft" class="ctrl-btn">Слева</button>
+                <button id="viewRight" class="ctrl-btn">Справа</button>
+                <button id="viewReset" class="ctrl-btn">Сброс</button>
+            </div>
+        </div>
+        <div id="detailCanvas" class="detail-canvas"></div>
+        <div class="model-title" id="modelTitle">Загрузка модели...</div>
+    </div>
+
+    <script type="module" src="detail.js"></script>
+</body>
+</html>

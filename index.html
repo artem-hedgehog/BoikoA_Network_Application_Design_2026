@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>3D Gallery — GLB модели</title>
+    <link rel="stylesheet" href="styles.css">
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/examples/jsm/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <h1>🎨 3D Gallery</h1>
+        <div class="upload-area">
+            <label for="modelUpload" class="upload-btn">➕ Загрузить GLB</label>
+            <input type="file" id="modelUpload" accept=".glb" style="display: none">
+        </div>
+    </header>
+
+    <main class="gallery-container">
+        <div id="galleryGrid" class="gallery-grid"></div>
+    </main>
+
+    <footer class="footer">
+        <p>Кликните на карточку для детального просмотра | Поддерживаются .glb модели</p>
+    </footer>
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>
