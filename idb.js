@@ -2,7 +2,7 @@ const DB_NAME = '3D_Gallery_DB';
 const STORE_NAME = 'user_models';
 const DB_VERSION = 1;
 
-export function openDB() {
+function openDB() {
     return new Promise((resolve, reject) => {
         const request = indexedDB.open(DB_NAME, DB_VERSION);
         request.onerror = () => reject(request.error);
@@ -18,33 +18,55 @@ export function openDB() {
 
 export async function saveModel(file, dataArrayBuffer) {
     const db = await openDB();
-    const tx = db.transaction(STORE_NAME, 'readwrite');
-    const store = tx.objectStore(STORE_NAME);
-    const model = {
-        name: file.name.replace(/\.glb$/i, ''),
-        originalName: file.name,
-        data: dataArrayBuffer,
-        date: Date.now(),
-        type: 'user'
-    };
-    const id = await store.add(model);
-    await tx.done;
-    return { ...model, id };
+    return new Promise((resolve, reject) => {
+        const tx = db.transaction(STORE_NAME, 'readwrite');
+        const store = tx.objectStore(STORE_NAME);
+        const model = {
+            name: file.name.replace(/\.glb$/i, ''),
+            originalName: file.name,
+            data: dataArrayBuffer,
+            date: Date.now(),
+            type: 'user'
+        };
+        const request = store.add(model);
+        request.onsuccess = () => {
+            tx.oncomplete = () => resolve({ ...model, id: request.result });
+            tx.onerror = () => reject(tx.error);
+        };
+        request.onerror = () => reject(request.error);
+    });
 }
 
 export async function getAllUserModels() {
-    const db = await openDB();
-    const tx = db.transaction(STORE_NAME, 'readonly');
-    const store = tx.objectStore(STORE_NAME);
-    const models = await store.getAll();
-    await tx.done;
-    return models || []; // всегда массив
+    try {
+        const db = await openDB();
+        const models = await new Promise((resolve, reject) => {
+            const tx = db.transaction(STORE_NAME, 'readonly');
+            const store = tx.objectStore(STORE_NAME);
+            const request = store.getAll();
+            request.onsuccess = () => resolve(request.result);
+            request.onerror = () => reject(request.error);
+            tx.onerror = () => reject(tx.error);
+        });
+        return Array.isArray(models) ? models : [];
+    } catch (err) {
+        console.error('getAllUserModels error:', err);
+        return [];
+    }
 }
 
 export async function deleteUserModel(id) {
     const db = await openDB();
-    const tx = db.transaction(STORE_NAME, 'readwrite');
-    const store = tx.objectStore(STORE_NAME);
-    await store.delete(id);
-    await tx.done;
+    return new Promise((resolve, reject) => {
+        const tx = db.transaction(STORE_NAME, 'readwrite');
+        const store = tx.objectStore(STORE_NAME);
+        const request = store.delete(id);
+        request.onsuccess = () => {
+            tx.oncomplete = () => resolve();
+            tx.onerror = () => reject(tx.error);
+        };
+        request.onerror = () => reject(request.error);
+    });
 }
+
+export { openDB };
