@@ -1,10 +1,6 @@
 const fs = require('fs');
 
-/**
- * Чтение данных из JSON-файла
- * @param {string} filePath - путь к файлу
- * @returns {Array} массив объектов
- */
+
 const readData = (filePath) => {
     try {
         const data = fs.readFileSync(filePath, 'utf8');
@@ -15,11 +11,7 @@ const readData = (filePath) => {
     }
 };
 
-/**
- * Запись данных в JSON-файл
- * @param {string} filePath - путь к файлу
- * @param {Array} data - массив для сохранения
- */
+
 const writeData = (filePath, data) => {
     try {
         fs.writeFileSync(filePath, JSON.stringify(data, null, 2), 'utf8');
