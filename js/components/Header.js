@@ -152,7 +152,7 @@ export class Header {
                             <li class="simple-menu__item"><a href="#" class="simple-menu__link">Для бизнеса</a></li>
                             <li class="simple-menu__item"><a href="#" class="simple-menu__link" id="calc-nav-link">Калькулятор</a></li>
                             <li class="simple-menu__item"><a href="#tasks" class="simple-menu__link">Задачи</a></li>
-                            <li class="simple-menu__item"><a href="#" class="simple-menu__link">Авиабилеты</a></li>
+                            <li class="simple-menu__item"><a href="#create" class="simple-menu__link">Создать</a></li>
                             <li class="simple-menu__item"><span class="simple-menu__link">RUB</span></li>
                         </ul>
                         <div class="header__balance-block">0 баллов</div>
@@ -195,24 +195,5 @@ export class Header {
                 window.location.hash = 'calculator';
             });
         }
-    }
-
-}
-
-
-export class HeaderComponent {
-    constructor(parent) {
-        this.parent = parent;
-    }
-
-    render(goHomeCallback, goCreateCallback) {
-        this.parent.innerHTML = `
-            <nav class="navbar navbar-light bg-light px-3">
-                <button id="home-btn" class="btn btn-outline-primary">🏠 Домой</button>
-                <button id="create-btn" class="btn btn-success">➕ Создать карточку</button>
-            </nav>
-        `;
-        document.getElementById('home-btn')?.addEventListener('click', goHomeCallback);
-        document.getElementById('create-btn')?.addEventListener('click', goCreateCallback);
     }
 }
