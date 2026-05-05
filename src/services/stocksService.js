@@ -26,7 +26,6 @@ const findOne = (id) => {
     return stocks.find(stock => stock.id === id) || null;
 };
 
-
 const create = (stockData) => {
     const stocks = fileService.readData(dataFilePath);
     const newId = stocks.length > 0 ? Math.max(...stocks.map(s => s.id)) + 1 : 1;

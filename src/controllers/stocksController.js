@@ -20,7 +20,6 @@ const getStockById = (req, res) => {
 
 const createStock = (req, res) => {
     const { src, title, text } = req.body;
-    // Валидация: все поля обязательны
     if (!src || !title || !text) {
         return res.status(400).json({ error: 'Не все поля заполнены (src, title, text)' });
     }
